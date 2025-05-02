@@ -1,0 +1,145 @@
+#include<iostream>
+using namespace std;
+
+// Functions names 
+
+int** first_array(int x, int y);
+int** second_array(int z, int a);
+int** third_array(int y, int z);
+int** input_first_array(int** a, int x, int y);
+int** input_second_array(int** b, int z, int a);
+int** third_final_array(int** r, int** b, int** c, int x, int y, int a);
+void showing_ab(int** r, int** b, int x, int y, int a);
+int** final_output(int** c, int x, int a);
+
+// Main Body
+
+int main() {
+	int x, y, z, a;
+	cout << "\"Warning\" \a \n The column of first array is must equal to the row of second array " << endl;
+	cout << "Enter row size for first matrix : ";
+	cin >> x;
+	cout << "Enter column size for second matrix : ";
+	cin >> y;
+	cout << "Enter row size for second matrix : ";
+	cin >> z;
+	cout << "Enter column size for second matrix : ";
+	cin >> a;
+
+	if (y == z) {
+		int** f_array = first_array(x, y);
+		int** s_array = second_array(z, a);
+		int** t_array = third_array(x, a);
+		int** fs_array = input_first_array(f_array, x, y);
+		int** se_array = input_second_array(s_array, z, a);
+		int** c = third_final_array(fs_array, se_array, t_array, x, y, a);
+		cout << endl << endl;
+		showing_ab(fs_array, se_array, x, y, a);
+		cout << endl << endl << endl;
+		final_output(c, x, a);
+
+
+	}
+	else {
+		system("cls");
+		cout << "The size of first matrix column is equal to the size of second matrix row ";
+	}
+}
+
+// Functions Code 
+
+//Decleraing First array
+int** first_array(int x, int y) {
+	int** a = new int* [x];
+	for (int i = 0; i < x; i++) {
+		a[i] = new int[y];
+	}
+	return a;
+}
+
+//Decleraing Second array
+int** second_array(int z, int a) {
+	int** b = new int* [z];
+	for (int i = 0; i < z; i++) {
+		b[i] = new int[a];
+	}
+	return b;
+}
+
+//Decleraing Third array
+int** third_array(int y, int z) {
+	int** c = new int* [y];
+	for (int i = 0; i < y; i++) {
+		c[i] = new int[z];
+	}
+	return c;
+}
+
+//Givivng values to first array
+int** input_first_array(int** a, int x, int y) {
+	cout << "Matirx 1" << endl;
+	for (int i = 0; i < x; i++) {
+		cout << "Row : " << i + 1 << endl;
+		for (int k = 0; k < y; k++) {
+			cout << "Enter the value of column number " << k + 1 << " : ";
+			cin >> a[i][k];
+		}
+	}
+	return a;
+}
+
+//Givivng values to second array
+int** input_second_array(int** b, int z, int a) {
+	cout << "Matirx 2" << endl;
+	for (int i = 0; i < z; i++) {
+		cout << "Row : " << i + 1 << endl;
+		for (int k = 0; k < a; k++) {
+			cout << "Enter the value of column number " << k + 1 << " : ";
+			cin >> b[i][k];
+		}
+	}
+	return b;
+}
+
+//Saving values on array
+int** third_final_array(int** r, int** b, int** c, int x, int y, int a) {
+	for (int i = 0; i < x; i++) {
+		for (int k = 0; k < a; k++) {
+			c[i][k] = 0;
+			{
+				for (int l = 0; l < y; l++) {
+					c[i][k] += r[i][l] * b[l][k];
+				}
+			}
+		}
+	}
+	return c;
+}
+
+// Showing first and second array
+void showing_ab(int** r, int** b, int x, int y, int a) {
+	for (int i = 0; i < x; i++) {
+		for (int k = 0; k < y; k++) {
+			cout << r[i][k] << " ";
+		}
+		cout << endl;
+	}
+	cout << endl << endl;
+	for (int i = 0; i < y; i++) {
+		for (int k = 0; k < a; k++) {
+			cout << b[i][k] << " ";
+		}
+		cout << endl;
+	}
+}
+
+//Showing final output (Third array)
+int** final_output(int** c, int x, int a) {
+	for (int i = 0; i < x; i++) {
+		for (int j = 0; j < a; j++) {
+			cout << c[i][j] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
